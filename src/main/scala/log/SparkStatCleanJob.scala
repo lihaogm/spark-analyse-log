@@ -18,11 +18,11 @@ object SparkStatCleanJob {
     val accessDF = spark.createDataFrame(accessRDD.map(x => AccessConvertUtil.parseLog(x)),
       AccessConvertUtil.struct)
 
-    accessDF.printSchema()
-    accessDF.show(false)
+//    accessDF.printSchema()
+//    accessDF.show(false)
 
     // coalesce:设置输出文件的个数，默认3个
-//    accessDF.coalesce(1).write.format("parquet").mode(SaveMode.Overwrite)
-//      .partitionBy("day").save("/Users/Mac/testdata/log_clean/")
+    accessDF.coalesce(1).write.format("parquet").mode(SaveMode.Overwrite)
+      .partitionBy("day").save("/Users/Mac/testdata/log_clean/")
   }
 }
